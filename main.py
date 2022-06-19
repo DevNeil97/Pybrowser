@@ -1,8 +1,8 @@
 import  sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QToolBar, QPushButton, QLineEdit
 from PyQt5.QtGui import QIcon, QFont
-from PyQt5.QtCore import QSize
-
+from PyQt5.QtCore import QSize, QUrl
+from PyQt5.QtWebEngineWidgets import QWebEnginePage, QWebEngineView
 class Window(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -16,11 +16,13 @@ class Window(QMainWindow):
         self.backbutton = QPushButton()
         self.backbutton.setIcon(QIcon("icons/Back.png"))
         self.backbutton.setIconSize(QSize(36,36))
+        self.backbutton.clicked.connect(self.backBtn)
         toolbar.addWidget(self.backbutton)
 
         self.forwardButton = QPushButton()
         self.forwardButton.setIcon(QIcon("icons/Forward.png"))
         self.forwardButton.setIconSize(QSize(36, 36))
+        self.forwardButton.clicked.connect(self.fowardBtn)
         toolbar.addWidget(self.forwardButton)
 
         self.reloadButton = QPushButton()
@@ -40,10 +42,24 @@ class Window(QMainWindow):
         self.searchButton = QPushButton()
         self.searchButton.setIcon(QIcon("icons/Search.png"))
         self.searchButton.setIconSize(QSize(36, 36))
+        self.searchButton.clicked.connect(self.searchBtn)
         toolbar.addWidget(self.searchButton)
 
+        self.WebengineViwe = QWebEngineView()
+        self.setCentralWidget(self.WebengineViwe)
+        initialURL = 'https://google.com'
+        self.addressBar.setText(initialURL)
+        self.WebengineViwe.load(QUrl(initialURL))
 
+    def searchBtn (self):
+        url = self.addressBar.text()
+        self.WebengineViwe.load(QUrl(url))
 
+    def backBtn (self):
+        self.WebengineViwe.back()
+
+    def fowardBtn (self):
+        self.WebengineViwe.forward()
 
 
 
