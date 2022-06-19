@@ -1,6 +1,6 @@
 import  sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QToolBar, QPushButton
-from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow, QApplication, QToolBar, QPushButton, QLineEdit
+from PyQt5.QtGui import QIcon, QFont
 from PyQt5.QtCore import QSize
 
 class Window(QMainWindow):
@@ -32,6 +32,10 @@ class Window(QMainWindow):
         self.homeButton.setIcon(QIcon("icons/Home.png"))
         self.homeButton.setIconSize(QSize(36, 36))
         toolbar.addWidget(self.homeButton)
+
+        self.addressBar = QLineEdit()
+        self.addressBar.setFont(QFont("comicsans",18))
+        toolbar.addWidget(self.addressBar)
 
 
 
