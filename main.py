@@ -37,6 +37,13 @@ class Window(QMainWindow):
         self.addressBar.setFont(QFont("comicsans",18))
         toolbar.addWidget(self.addressBar)
 
+        self.searchButton = QPushButton()
+        self.searchButton.setIcon(QIcon("icons/Search.png"))
+        self.searchButton.setIconSize(QSize(36, 36))
+        toolbar.addWidget(self.searchButton)
+
+
+
 
 
 
