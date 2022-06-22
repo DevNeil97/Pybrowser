@@ -28,16 +28,19 @@ class Window(QMainWindow):
         self.reloadButton = QPushButton()
         self.reloadButton.setIcon(QIcon("icons/Reload.png"))
         self.reloadButton.setIconSize(QSize(36, 36))
+        self.reloadButton.clicked.connect(self.reloadBtn)
         toolbar.addWidget(self.reloadButton)
 
         self.homeButton = QPushButton()
         self.homeButton.setIcon(QIcon("icons/Home.png"))
         self.homeButton.setIconSize(QSize(36, 36))
         toolbar.addWidget(self.homeButton)
+        self.homeButton.clicked.connect(self.homeBtn)
 
         self.addressBar = QLineEdit()
         self.addressBar.setFont(QFont("comicsans",18))
         toolbar.addWidget(self.addressBar)
+        self.addressBar.returnPressed.connect(self.searchBtn)
 
         self.searchButton = QPushButton()
         self.searchButton.setIcon(QIcon("icons/Search.png"))
@@ -47,9 +50,9 @@ class Window(QMainWindow):
 
         self.WebengineViwe = QWebEngineView()
         self.setCentralWidget(self.WebengineViwe)
-        initialURL = 'https://google.com'
-        self.addressBar.setText(initialURL)
-        self.WebengineViwe.load(QUrl(initialURL))
+        self.initialURL = 'https://google.com'
+        self.addressBar.setText(self.initialURL)
+        self.WebengineViwe.load(QUrl(self.initialURL))
 
     def searchBtn (self):
         url = self.addressBar.text()
@@ -60,6 +63,14 @@ class Window(QMainWindow):
 
     def fowardBtn (self):
         self.WebengineViwe.forward()
+
+    def reloadBtn (self):
+        self.WebengineViwe.reload()
+
+    def homeBtn (self):
+        self.WebengineViwe.load(QUrl(self.initialURL))
+
+
 
 
 
